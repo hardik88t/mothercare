@@ -1,103 +1,119 @@
-import Image from "next/image";
+import { doctors } from '@/data/doctors'
+import { medicalServices, getFeaturedServices } from '@/data/services'
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const featuredServices = getFeaturedServices()
+  const featuredDoctors = doctors.slice(0, 3)
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  return (
+    <div className="min-h-screen">
+      {/* Hero Section */}
+      <section className="relative bg-gradient-to-br from-primary/5 via-background to-secondary/20 py-20 px-4">
+        <div className="max-w-7xl mx-auto text-center">
+          <div className="mb-6">
+            <span className="trust-badge">🏥 Trusted Healthcare Since 2010</span>
+          </div>
+          <h1 className="medical-heading mb-6">
+            Comprehensive Women's Healthcare
+            <br />
+            <span className="text-primary">You Can Trust</span>
+          </h1>
+          <p className="medical-body max-w-2xl mx-auto mb-8 text-lg">
+            MotherCare provides expert gynecological and obstetric care with modern facilities,
+            experienced doctors, and 24/7 emergency services. Your health and comfort are our priority.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <button className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-3 rounded-lg font-semibold transition-colors">
+              Book Appointment
+            </button>
+            <button className="bg-secondary text-secondary-foreground hover:bg-secondary/80 px-8 py-3 rounded-lg font-semibold transition-colors">
+              Emergency: (555) 123-4567
+            </button>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </section>
+
+      {/* Featured Services */}
+      <section className="py-16 px-4 bg-background">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="medical-heading mb-4">Our Medical Services</h2>
+            <p className="medical-body max-w-2xl mx-auto">
+              Comprehensive women's healthcare services delivered by experienced specialists
+              using state-of-the-art medical technology.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {featuredServices.map((service) => (
+              <div key={service.id} className="medical-card group cursor-pointer">
+                <div className="text-primary mb-4 text-2xl">🏥</div>
+                <h3 className="medical-subheading mb-3 text-lg">{service.name}</h3>
+                <p className="medical-body text-sm mb-4">{service.shortDescription}</p>
+                {service.isEmergency && (
+                  <span className="emergency-badge">24/7 Available</span>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Doctors */}
+      <section className="py-16 px-4 bg-secondary/30">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="medical-heading mb-4">Meet Our Expert Doctors</h2>
+            <p className="medical-body max-w-2xl mx-auto">
+              Our team of highly qualified gynecologists and specialists are dedicated
+              to providing personalized, compassionate care for every patient.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            {featuredDoctors.map((doctor) => (
+              <div key={doctor.id} className="medical-card text-center">
+                <div className="w-24 h-24 bg-primary/10 rounded-full mx-auto mb-4 flex items-center justify-center">
+                  <span className="text-2xl">👩‍⚕️</span>
+                </div>
+                <h3 className="medical-subheading mb-2">{doctor.name}</h3>
+                <p className="text-primary font-medium mb-2">{doctor.title}</p>
+                <p className="medical-body text-sm mb-3">
+                  {doctor.experience} years experience
+                </p>
+                <div className="flex items-center justify-center gap-1 mb-3">
+                  <span className="text-yellow-500">⭐</span>
+                  <span className="font-medium">{doctor.rating}</span>
+                  <span className="medical-body text-sm">({doctor.reviewCount} reviews)</span>
+                </div>
+                <div className="flex flex-wrap gap-1 justify-center">
+                  {doctor.specialization.slice(0, 2).map((spec, index) => (
+                    <span key={index} className="trust-badge text-xs">
+                      {spec}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Emergency Contact */}
+      <section className="py-12 px-4 bg-destructive/5 border-t border-destructive/20">
+        <div className="max-w-7xl mx-auto text-center">
+          <h2 className="text-2xl font-bold text-destructive mb-4">24/7 Emergency Care</h2>
+          <p className="medical-body mb-6">
+            For urgent medical situations, our emergency team is available round the clock.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <a href="tel:+15551234567" className="bg-destructive text-destructive-foreground hover:bg-destructive/90 px-8 py-3 rounded-lg font-bold transition-colors">
+              📞 Emergency: (555) 123-4567
+            </a>
+            <span className="medical-body">
+              📍 123 Healthcare Ave, Medical District, City 12345
+            </span>
+          </div>
+        </div>
+      </section>
     </div>
-  );
+  )
 }

@@ -1,9 +1,7 @@
 import React from 'react'
-import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { ArrowLeft, ArrowRight, User, Mail, Phone, Calendar, FileText } from 'lucide-react'
-import { PatientInformationFormData } from '@/lib/validation/appointment-schema'
-import { isValidEmail, isValidPhone } from '@/lib/utils'
+import { PatientInformationFormData } from '@/lib/validation/appointment-validation'
 
 interface PatientInfoFormProps {
   formData: Partial<PatientInformationFormData>

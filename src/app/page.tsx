@@ -1,5 +1,5 @@
 import { doctors } from '@/data/doctors'
-import { medicalServices, getFeaturedServices } from '@/data/services'
+import { getFeaturedServices } from '@/data/services'
 
 export default function Home() {
   const featuredServices = getFeaturedServices()

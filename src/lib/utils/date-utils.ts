@@ -1,4 +1,4 @@
-import { format, parse, addDays, addMinutes, isAfter, isBefore, isSameDay, startOfDay, endOfDay, differenceInMinutes } from 'date-fns'
+import { format, addDays, addMinutes, isAfter, isBefore, isSameDay, differenceInMinutes } from 'date-fns'
 import { DoctorAvailability } from '@/types'
 import { TimeSlot } from '@/types/appointment'
 

@@ -7,61 +7,41 @@ const medicalRecordNumberRegex = /^[A-Za-z0-9-]+$/
 
 // Service & Doctor Selection Schema
 export const serviceSelectionSchema = z.object({
-  serviceId: z.string({
-    required_error: "Please select a service",
-  }).min(1, {
-    message: "Please select a service",
-  }),
+  serviceId: z.string()
+    .min(1, { message: "Please select a service" })
 })
 
 export const doctorSelectionSchema = z.object({
-  doctorId: z.string({
-    required_error: "Please select a doctor",
-  }).min(1, {
-    message: "Please select a doctor",
-  }),
+  doctorId: z.string()
+    .min(1, { message: "Please select a doctor" })
 })
 
 // Date & Time Selection Schema
 export const dateTimeSelectionSchema = z.object({
-  appointmentDate: z.date({
-    required_error: "Please select a date",
-  }).refine(date => !isDateInPast(date), {
-    message: "Appointment date cannot be in the past",
-  }),
-  appointmentTime: z.string({
-    required_error: "Please select a time",
-  }).min(1, {
-    message: "Please select a time",
-  }),
+  appointmentDate: z.date()
+    .refine(date => !isDateInPast(date), {
+      message: "Appointment date cannot be in the past",
+    }),
+  appointmentTime: z.string()
+    .min(1, { message: "Please select a time" })
 })
 
 // Patient Information Schema
 export const patientInformationSchema = z.object({
-  patientName: z.string({
-    required_error: "Please enter your name",
-  }).min(2, {
-    message: "Name must be at least 2 characters",
-  }).max(100, {
-    message: "Name cannot exceed 100 characters",
-  }).refine(name => /^[A-Za-z\s\-'.]+$/.test(name), {
-    message: "Name can only contain letters, spaces, hyphens, apostrophes, and periods",
-  }),
-  patientEmail: z.string({
-    required_error: "Please enter your email",
-  }).email({
-    message: "Please enter a valid email address",
-  }).max(100, {
-    message: "Email cannot exceed 100 characters",
-  }),
-  patientPhone: z.string({
-    required_error: "Please enter your phone number",
-  }).regex(phoneRegex, {
-    message: "Please enter a valid phone number (e.g., 123-456-7890)",
-  }),
-  dateOfBirth: z.date({
-    required_error: "Please enter your date of birth",
-  }).optional()
+  patientName: z.string()
+    .min(2, { message: "Name must be at least 2 characters" })
+    .max(100, { message: "Name cannot exceed 100 characters" })
+    .refine(name => /^[A-Za-z\s\-'.]+$/.test(name), {
+      message: "Name can only contain letters, spaces, hyphens, apostrophes, and periods",
+    }),
+  patientEmail: z.string()
+    .email({ message: "Please enter a valid email address" })
+    .max(100, { message: "Email cannot exceed 100 characters" }),
+  patientPhone: z.string()
+    .regex(phoneRegex, {
+      message: "Please enter a valid phone number (e.g., 123-456-7890)",
+    }),
+  dateOfBirth: z.date().optional()
     .refine(date => !date || date < new Date(), {
       message: "Date of birth cannot be in the future",
     })
@@ -86,30 +66,25 @@ export const patientInformationWithConditionalSchema = patientInformationSchema.
 
 // Medical Information Schema
 export const medicalInformationSchema = z.object({
-  reasonForVisit: z.string({
-    required_error: "Please enter your reason for visit",
-  }).min(5, {
-    message: "Please provide more details about your reason for visit",
-  }).max(1000, {
-    message: "Reason for visit cannot exceed 1000 characters",
-  }),
+  reasonForVisit: z.string()
+    .min(5, { message: "Please provide more details about your reason for visit" })
+    .max(1000, { message: "Reason for visit cannot exceed 1000 characters" }),
   isPregnant: z.boolean().optional(),
-  weeksOfGestation: z.number().min(1, {
-    message: "Weeks of gestation must be at least 1",
-  }).max(42, {
-    message: "Weeks of gestation cannot exceed 42",
-  }).optional(),
+  weeksOfGestation: z.number()
+    .min(1, { message: "Weeks of gestation must be at least 1" })
+    .max(42, { message: "Weeks of gestation cannot exceed 42" })
+    .optional(),
   dueDate: z.date().optional()
     .refine(date => !date || date > new Date(), {
       message: "Due date must be in the future",
     }),
   isHighRisk: z.boolean().optional(),
-  currentMedications: z.string().max(1000, {
-    message: "Current medications cannot exceed 1000 characters",
-  }).optional(),
-  allergies: z.string().max(1000, {
-    message: "Allergies cannot exceed 1000 characters",
-  }).optional(),
+  currentMedications: z.string()
+    .max(1000, { message: "Current medications cannot exceed 1000 characters" })
+    .optional(),
+  allergies: z.string()
+    .max(1000, { message: "Allergies cannot exceed 1000 characters" })
+    .optional(),
 })
 
 // Add conditional validation for pregnancy information
@@ -123,13 +98,11 @@ export const medicalInformationWithConditionalSchema = medicalInformationSchema.
 
 // Preferences Schema
 export const preferencesSchema = z.object({
-  preferredContactMethod: z.enum(['email', 'phone', 'sms'], {
-    required_error: "Please select a preferred contact method",
-  }),
+  preferredContactMethod: z.enum(['email', 'phone', 'sms']),
   isEmergency: z.boolean().default(false),
-  notes: z.string().max(1000, {
-    message: "Notes cannot exceed 1000 characters",
-  }).optional(),
+  notes: z.string()
+    .max(1000, { message: "Notes cannot exceed 1000 characters" })
+    .optional(),
   addToCalendar: z.enum(['google', 'apple', 'outlook', 'none']).optional(),
 })
 

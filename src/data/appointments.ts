@@ -1,5 +1,5 @@
 import { EnhancedAppointment, TimeSlot } from '@/types/appointment'
-import { addDays, addMinutes, format, parse, setHours, setMinutes } from 'date-fns'
+import { addDays } from 'date-fns'
 import { doctors } from './doctors'
 import { medicalServices } from './services'
 import { combineDateAndTime, getAvailableTimeSlots } from '@/lib/utils/date-utils'

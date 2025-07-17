@@ -8,7 +8,7 @@ import {
   patientInformationSchema,
   medicalInformationSchema,
   preferencesSchema
-} from '@/lib/validation/appointment-schema'
+} from '@/lib/validation/appointment-validation'
 import { z } from 'zod'
 
 // Initial empty form state
@@ -80,9 +80,9 @@ export function useAppointmentForm() {
       if (error instanceof z.ZodError) {
         // Convert Zod errors to a more usable format
         const newErrors: Record<string, string> = {}
-        error.errors.forEach(err => {
-          if (err.path) {
-            newErrors[err.path.join('.')] = err.message
+        error.issues.forEach(issue => {
+          if (issue.path) {
+            newErrors[issue.path.join('.')] = issue.message
           }
         })
         setErrors(newErrors)
@@ -169,9 +169,9 @@ export function useAppointmentForm() {
     } catch (error) {
       if (error instanceof z.ZodError) {
         const newErrors: Record<string, string> = {}
-        error.errors.forEach(err => {
-          if (err.path) {
-            newErrors[err.path.join('.')] = err.message
+        error.issues.forEach(issue => {
+          if (issue.path) {
+            newErrors[issue.path.join('.')] = issue.message
           }
         })
         setErrors(newErrors)

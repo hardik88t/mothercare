@@ -13,17 +13,21 @@ import { isDateInPast } from '@/lib/utils/date-utils'
  * @param obj Object to check
  * @returns Boolean indicating if object is a TimeSlot
  */
-export function isTimeSlot(obj: any): obj is TimeSlot {
+export function isTimeSlot(obj: unknown): obj is TimeSlot {
+  if (!obj || typeof obj !== 'object') {
+    return false;
+  }
+  
+  const slot = obj as Record<string, unknown>;
+  
   return (
-    obj &&
-    typeof obj === 'object' &&
-    typeof obj.id === 'string' &&
-    typeof obj.doctorId === 'string' &&
-    obj.startTime instanceof Date &&
-    obj.endTime instanceof Date &&
-    typeof obj.isAvailable === 'boolean' &&
-    (obj.appointmentId === null || typeof obj.appointmentId === 'string')
-  )
+    typeof slot.id === 'string' &&
+    typeof slot.doctorId === 'string' &&
+    slot.startTime instanceof Date &&
+    slot.endTime instanceof Date &&
+    typeof slot.isAvailable === 'boolean' &&
+    (slot.appointmentId === null || typeof slot.appointmentId === 'string')
+  );
 }
 
 /**
@@ -31,25 +35,29 @@ export function isTimeSlot(obj: any): obj is TimeSlot {
  * @param obj Object to check
  * @returns Boolean indicating if object is an EnhancedAppointment
  */
-export function isEnhancedAppointment(obj: any): obj is EnhancedAppointment {
+export function isEnhancedAppointment(obj: unknown): obj is EnhancedAppointment {
+  if (!obj || typeof obj !== 'object') {
+    return false;
+  }
+  
+  const appointment = obj as Record<string, unknown>;
+  
   return (
-    obj &&
-    typeof obj === 'object' &&
-    typeof obj.id === 'string' &&
-    typeof obj.doctorId === 'string' &&
-    typeof obj.serviceId === 'string' &&
-    obj.dateTime instanceof Date &&
-    typeof obj.duration === 'number' &&
-    isAppointmentStatus(obj.status) &&
-    obj.createdAt instanceof Date &&
-    obj.updatedAt instanceof Date &&
-    (obj.notes === null || typeof obj.notes === 'string') &&
-    typeof obj.isNewPatient === 'boolean' &&
-    typeof obj.isEmergency === 'boolean' &&
-    isPatientInfo(obj.patientInfo) &&
-    typeof obj.confirmationSent === 'boolean' &&
-    typeof obj.reminderSent === 'boolean'
-  )
+    typeof appointment.id === 'string' &&
+    typeof appointment.doctorId === 'string' &&
+    typeof appointment.serviceId === 'string' &&
+    appointment.dateTime instanceof Date &&
+    typeof appointment.duration === 'number' &&
+    isAppointmentStatus(appointment.status as unknown) &&
+    appointment.createdAt instanceof Date &&
+    appointment.updatedAt instanceof Date &&
+    (appointment.notes === null || typeof appointment.notes === 'string') &&
+    typeof appointment.isNewPatient === 'boolean' &&
+    typeof appointment.isEmergency === 'boolean' &&
+    isPatientInfo(appointment.patientInfo) &&
+    typeof appointment.confirmationSent === 'boolean' &&
+    typeof appointment.reminderSent === 'boolean'
+  );
 }
 
 /**
@@ -57,15 +65,15 @@ export function isEnhancedAppointment(obj: any): obj is EnhancedAppointment {
  * @param status Status to check
  * @returns Boolean indicating if status is valid
  */
-export function isAppointmentStatus(status: any): status is AppointmentStatus {
-  return [
+export function isAppointmentStatus(status: unknown): status is AppointmentStatus {
+  return typeof status === 'string' && [
     'scheduled',
     'confirmed',
     'completed',
     'cancelled',
     'rescheduled',
     'no-show'
-  ].includes(status)
+  ].includes(status as string);
 }
 
 /**
@@ -73,18 +81,23 @@ export function isAppointmentStatus(status: any): status is AppointmentStatus {
  * @param obj Object to check
  * @returns Boolean indicating if object is a PatientInfo
  */
-export function isPatientInfo(obj: any): obj is PatientInfo {
+export function isPatientInfo(obj: unknown): obj is PatientInfo {
+  if (!obj || typeof obj !== 'object') {
+    return false;
+  }
+  
+  const patient = obj as Record<string, unknown>;
+  
   return (
-    obj &&
-    typeof obj === 'object' &&
-    typeof obj.name === 'string' &&
-    typeof obj.email === 'string' &&
-    typeof obj.phone === 'string' &&
-    typeof obj.isReturningPatient === 'boolean' &&
-    ['email', 'phone', 'sms'].includes(obj.preferredContactMethod) &&
-    (obj.dateOfBirth === undefined || obj.dateOfBirth instanceof Date) &&
-    (obj.medicalRecordNumber === undefined || typeof obj.medicalRecordNumber === 'string')
-  )
+    typeof patient.name === 'string' &&
+    typeof patient.email === 'string' &&
+    typeof patient.phone === 'string' &&
+    typeof patient.isReturningPatient === 'boolean' &&
+    typeof patient.preferredContactMethod === 'string' &&
+    ['email', 'phone', 'sms'].includes(patient.preferredContactMethod as string) &&
+    (patient.dateOfBirth === undefined || patient.dateOfBirth instanceof Date) &&
+    (patient.medicalRecordNumber === undefined || typeof patient.medicalRecordNumber === 'string')
+  );
 }
 
 /**

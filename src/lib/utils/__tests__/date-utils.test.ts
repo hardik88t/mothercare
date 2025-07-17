@@ -14,7 +14,7 @@ import {
 } from '../date-utils'
 import { DoctorAvailability } from '@/types'
 import { TimeSlot } from '@/types/appointment'
-import { addDays, addMinutes, subDays } from 'date-fns'
+import { addDays, subDays } from 'date-fns'
 
 describe('Date Utility Functions', () => {
   // Test formatDate function

@@ -176,7 +176,7 @@ export interface PageMeta {
   keywords: string[]
   ogImage?: string
   canonical?: string
-  schema?: Record<string, any>
+  schema?: Record<string, unknown>
 }
 
 // Insurance types

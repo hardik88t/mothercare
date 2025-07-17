@@ -1,4 +1,4 @@
-import { Doctor, MedicalService } from '.'
+import { Doctor, MedicalService } from '.' // These types are used in JSDoc comments
 
 // Enhanced Appointment type with additional fields from our design
 export interface EnhancedAppointment {

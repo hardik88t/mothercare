@@ -8,7 +8,7 @@ import {
   patientInformationSchema,
   medicalInformationSchema,
   preferencesSchema
-} from '@/lib/validation/appointment-schema'
+} from '@/lib/validation/appointment-validation'
 import { AppointmentFormData, AppointmentStep } from '@/types/appointment'
 
 export function useFormValidation() {
@@ -52,9 +52,9 @@ export function useFormValidation() {
     } catch (error) {
       if (error instanceof z.ZodError) {
         const newErrors: Record<string, string> = {}
-        error.errors.forEach(err => {
-          if (err.path) {
-            newErrors[err.path.join('.')] = err.message
+        error.issues.forEach(issue => {
+          if (issue.path) {
+            newErrors[issue.path.join('.')] = issue.message
           }
         })
         setErrors(newErrors)
@@ -70,7 +70,7 @@ export function useFormValidation() {
       return null
     } catch (error) {
       if (error instanceof z.ZodError) {
-        const fieldError = error.errors.find(err => err.path[0] === fieldName)
+        const fieldError = error.issues.find(issue => issue.path[0] === fieldName)
         return fieldError?.message || null
       }
       return null
@@ -86,9 +86,9 @@ export function useFormValidation() {
     } catch (error) {
       if (error instanceof z.ZodError) {
         const newErrors: Record<string, string> = {}
-        error.errors.forEach(err => {
-          if (err.path) {
-            newErrors[err.path.join('.')] = err.message
+        error.issues.forEach(issue => {
+          if (issue.path) {
+            newErrors[issue.path.join('.')] = issue.message
           }
         })
         setErrors(newErrors)

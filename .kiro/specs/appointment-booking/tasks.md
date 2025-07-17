@@ -68,7 +68,7 @@
     - _Requirements: 3.7_
 
 - [ ] 5. Develop appointment review and confirmation
-  - [ ] 5.1 Create appointment summary component
+  - [x] 5.1 Create appointment summary component
     - Display selected doctor, service, date, and time
     - Show patient information summary
     - Add edit functionality for each section

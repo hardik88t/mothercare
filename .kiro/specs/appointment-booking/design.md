@@ -1,144 +1,90 @@
-# Design Document: Appointment Booking System
+# Design Document: MotherCare Hospital Website
 
 ## Overview
 
-The Appointment Booking System for MotherCare gynecologist specialist hospital will provide patients with a seamless, user-friendly interface to schedule appointments with doctors based on service needs and availability. This design document outlines the technical approach, architecture, data models, and component structure that will be implemented to meet the requirements specified in the requirements document.
+The MotherCare Hospital website will be a simple, informational website that provides visitors with essential information about the gynecologist specialist hospital and includes a contact form for inquiries. This design document outlines the technical approach, architecture, and component structure for a clean, accessible, and mobile-friendly hospital website.
 
-The system will be built using Next.js 14 with the App Router, TypeScript for type safety, Tailwind CSS for styling, and shadcn/ui components for consistent UI elements. It will follow healthcare best practices including WCAG 2.1 AA compliance for accessibility, secure handling of patient data, and mobile-first design principles.
+The system will be built using Next.js 14 with the App Router, TypeScript for type safety, Tailwind CSS for styling, and shadcn/ui components for consistent UI elements. It will follow healthcare best practices including WCAG 2.1 AA compliance for accessibility and mobile-first design principles.
 
 ## Architecture
 
 ### System Architecture
 
-The appointment booking system will follow a client-server architecture with the following components:
+The hospital website will follow a simple client-side architecture with the following components:
 
 1. **Frontend Layer**:
    - Next.js 14 App Router for page routing and server components
    - React components for UI rendering
    - Client-side form validation with React Hook Form and Zod
-   - State management using React Context API for appointment flow
 
 2. **API Layer**:
-   - Next.js API routes for handling appointment requests
-   - Data validation and sanitization
-   - Integration with backend services
+   - Next.js API routes for handling contact form submissions
+   - Email service integration for form notifications
 
 3. **Data Layer**:
-   - Temporary data storage in JSON files for development
-   - Integration points for hospital systems in production
+   - Static data for services and doctor information
    - Type-safe data models with TypeScript
-
-4. **External Integrations**:
-   - Calendar services (Google Calendar, Apple Calendar, Outlook)
-   - Email notification service
-   - SMS notification service (optional)
 
 ### Technical Stack
 
 - **Frontend**: Next.js 14, React, TypeScript, Tailwind CSS, shadcn/ui
 - **Form Handling**: React Hook Form with Zod validation
-- **Date/Time**: date-fns for date manipulation
-- **Calendar UI**: react-calendar or @radix-ui/react-calendar
-- **Notifications**: Email.js or similar service for email notifications
-- **Animation**: Framer Motion for subtle UI animations
-- **Testing**: Jest, React Testing Library, Playwright for E2E tests
+- **Email**: Email service for contact form submissions
+- **Styling**: Tailwind CSS for responsive design
 
 ## Components and Interfaces
 
 ### Page Components
 
-1. **AppointmentPage** (`/appointment`):
-   - Main container for the appointment booking process
-   - Manages overall appointment flow state
-   - Renders step components based on current step
+1. **HomePage** (`/`):
+   - Hero section with hospital name and key messaging
+   - Services overview section
+   - Doctor information section
+   - Contact information section
 
-2. **AppointmentConfirmationPage** (`/appointment/confirmation`):
-   - Displays appointment confirmation details
-   - Provides options for calendar integration
-   - Offers links to prepare for appointment
+2. **ServicesPage** (`/services`):
+   - List of medical services offered
+   - Service descriptions and details
+   - Contact information for appointments
 
-3. **AppointmentManagementPage** (`/appointment/manage`):
-   - Interface for viewing and managing existing appointments
-   - Provides rescheduling and cancellation functionality
+3. **ContactPage** (`/contact`):
+   - Hospital contact information
+   - Contact form for inquiries
+   - Location and hours information
 
 ### UI Components
 
-1. **AppointmentStepper**:
-   - Visual indicator of the multi-step booking process
-   - Highlights current step and completion status
+1. **Header**:
+   - Hospital logo and navigation menu
+   - Mobile-responsive navigation
+   - Contact phone number
 
-2. **ServiceSelector**:
-   - Grid or list view of available medical services
-   - Filtering and categorization options
-   - Visual indicators for service types
+2. **Hero**:
+   - Hospital name and tagline
+   - Key services overview
+   - Prominent contact information
 
-3. **DoctorSelector**:
-   - Card-based interface showing available doctors
-   - Doctor photos, credentials, and specializations
-   - Filtering by service type and availability
+3. **ServiceCard**:
+   - Service name and description
+   - Simple, clean card layout
+   - Contact call-to-action
 
-4. **CalendarPicker**:
-   - Interactive calendar interface for date selection
-   - Visual indicators for available/unavailable dates
-   - Responsive design for mobile and desktop
+4. **DoctorProfile**:
+   - Doctor photo and credentials
+   - Specializations and experience
+   - Professional presentation
 
-5. **TimeSlotPicker**:
-   - Grid of available time slots for selected date
-   - Clear visual distinction between available and booked slots
-   - Morning/afternoon/evening categorization
+5. **ContactForm**:
+   - Name, phone, email, message fields
+   - Form validation and submission
+   - Success/error messaging
 
-6. **PatientInfoForm**:
-   - Form fields for patient information
-   - Progressive disclosure for conditional fields
-   - Accessible form controls with validation
-
-7. **AppointmentSummary**:
-   - Concise display of selected appointment details
-   - Doctor, service, date, time, and patient information
-   - Edit options for each section
-
-8. **ConfirmationDisplay**:
-   - Success confirmation with appointment details
-   - Calendar integration buttons
-   - Next steps information
-
-### Admin Components
-
-1. **AdminCalendarView**:
-   - Calendar interface for administrators
-   - Daily, weekly, and monthly views
-   - Appointment details on click/hover
-
-2. **DoctorScheduleManager**:
-   - Interface for managing doctor availability
-   - Block/unblock dates and times
-   - Recurring schedule settings
-
-3. **AppointmentDashboard**:
-   - Overview of upcoming appointments
-   - Search and filtering capabilities
-   - Basic reporting and statistics
+6. **Footer**:
+   - Contact information
+   - Hospital hours
+   - Emergency contact details
 
 ## Data Models
-
-### Appointment
-
-```typescript
-interface Appointment {
-  id: string;
-  patientId: string | null; // Null for new patients
-  doctorId: string;
-  serviceId: string;
-  dateTime: Date;
-  duration: number; // in minutes
-  status: 'scheduled' | 'completed' | 'cancelled' | 'rescheduled';
-  createdAt: Date;
-  updatedAt: Date;
-  notes: string | null;
-  isNewPatient: boolean;
-  isEmergency: boolean;
-}
-```
 
 ### Doctor
 
@@ -151,22 +97,7 @@ interface Doctor {
   specializations: string[];
   imageUrl: string;
   bio: string;
-  serviceIds: string[]; // Services offered by this doctor
-  availability: Availability[];
-}
-
-interface Availability {
-  dayOfWeek: 0 | 1 | 2 | 3 | 4 | 5 | 6; // 0 = Sunday, 6 = Saturday
-  startTime: string; // HH:MM format
-  endTime: string; // HH:MM format
-  isAvailable: boolean;
-}
-
-interface DoctorUnavailability {
-  doctorId: string;
-  startDate: Date;
-  endDate: Date;
-  reason: string | null; // Optional, may be hidden from public view
+  experience: string; // Years of experience
 }
 ```
 
@@ -177,82 +108,62 @@ interface Service {
   id: string;
   name: string;
   description: string;
-  category: 'obstetrics' | 'gynecology' | 'fertility' | 'surgery' | 'diagnostic';
-  duration: number; // Default duration in minutes
-  preparationInstructions: string | null;
-  imageUrl: string | null;
-  isEmergencyAvailable: boolean;
+  category: 'obstetrics' | 'gynecology' | 'laparoscopy' | 'infertility';
+  icon: string; // Icon name for display
 }
 ```
 
-### Patient
+### ContactForm
 
 ```typescript
-interface Patient {
-  id: string;
+interface ContactFormData {
   name: string;
-  email: string;
   phone: string;
-  dateOfBirth: Date | null;
-  isReturningPatient: boolean;
-  medicalRecordNumber: string | null; // For returning patients
-}
-
-interface PregnancyInfo {
-  patientId: string;
-  isPregnant: boolean;
-  weeksOfGestation: number | null;
-  dueDate: Date | null;
-  isHighRisk: boolean;
+  email: string;
+  message: string;
+  preferredContact: 'phone' | 'email';
 }
 ```
 
-### TimeSlot
+### HospitalInfo
 
 ```typescript
-interface TimeSlot {
-  id: string;
-  doctorId: string;
-  startTime: Date;
-  endTime: Date;
-  isAvailable: boolean;
-  appointmentId: string | null; // Null if not booked
+interface HospitalInfo {
+  name: string;
+  address: string;
+  phone: string;
+  emergencyPhone: string;
+  email: string;
+  hours: {
+    weekdays: string;
+    weekends: string;
+    emergency: string;
+  };
 }
 ```
 
 ## User Flow
 
-1. **Entry Point**:
-   - User navigates to Appointment page
-   - System displays service and doctor selection options
+1. **Homepage Visit**:
+   - User lands on homepage
+   - Views hospital information, services, and doctor details
+   - Sees prominent contact information
 
-2. **Service/Doctor Selection**:
-   - User selects either a service category or specific doctor
-   - System filters available options based on selection
+2. **Service Information**:
+   - User navigates to Services page (optional)
+   - Reviews available medical services
+   - Gets detailed service descriptions
 
-3. **Date Selection**:
-   - User views calendar with available dates
-   - System highlights dates with availability
-   - User selects preferred date
+3. **Contact/Inquiry**:
+   - User navigates to Contact page
+   - Views hospital location, hours, and contact details
+   - Fills out contact form for inquiries or appointment requests
 
-4. **Time Slot Selection**:
-   - System displays available time slots for selected date
-   - User selects preferred time slot
-
-5. **Patient Information**:
-   - User enters personal and contact information
-   - System validates input in real-time
-   - User provides reason for visit and medical information
-
-6. **Review & Confirm**:
-   - System displays appointment summary
-   - User reviews and confirms details
-   - System processes appointment request
-
-7. **Confirmation**:
-   - System displays confirmation message
-   - User receives email confirmation
-   - User can add appointment to calendar
+4. **Form Submission**:
+   - User submits contact form
+   - System validates form data
+   - User receives confirmation message
+   - Hospital receives email notification
 
 ## Error Handling
 
@@ -272,10 +183,10 @@ interface TimeSlot {
 
 ### Edge Cases
 
-- Handling concurrent bookings for same slot
-- Dealing with timezone differences
-- Managing doctor schedule changes
-- Handling emergency appointment requests
+- Handling high volume of contact form submissions
+- Managing spam form submissions
+- Handling email delivery failures
+- Emergency contact information accessibility
 
 ## Testing Strategy
 
@@ -293,7 +204,7 @@ interface TimeSlot {
 
 ### End-to-End Testing
 
-- Complete appointment booking flow
+- Complete contact form submission flow
 - Mobile and desktop viewport testing
 - Accessibility testing with screen readers
 
@@ -326,23 +237,23 @@ interface TimeSlot {
 
 - Responsive design for all viewport sizes
 - Touch-friendly UI elements
-- Simplified calendar view for small screens
-- Optimized form layout for mobile input
+- Optimized contact form layout for mobile input
 - Performance optimization for mobile networks
+- Easy-to-tap phone numbers and contact buttons
 
 ## Performance Considerations
 
 - Lazy loading of non-critical components
-- Optimized calendar rendering
+- Optimized image rendering for doctor photos
 - Efficient form state management
-- Image optimization for doctor photos
+- Image optimization and compression
 - Minimized network requests
 
 ## Future Enhancements
 
+- Online appointment booking system
 - Patient portal integration
-- Recurring appointment scheduling
-- Insurance information collection
-- Telemedicine appointment options
 - Multi-language support
-- AI-assisted scheduling recommendations
+- Live chat functionality
+- Email newsletter signup
+- Patient testimonials section

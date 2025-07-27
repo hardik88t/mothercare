@@ -1,127 +1,51 @@
-import { siteData } from '@/data';
-import { Section } from '@/components/layout/section';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { FloatingCard } from '@/components/ui/floating-card';
-import { GradientText } from '@/components/ui/gradient-text';
-import { AnimateOnScroll } from '@/components/ui/animate-on-scroll';
-
-export default function HomePage() {
-  const { practice, services, doctors } = siteData;
-
+export default function Home() {
   return (
-    <div className="min-h-screen bg-background">
-      {/* Hero Section */}
-      <Section spacing="xl" className="relative overflow-hidden">
-        <div className="text-center relative z-10">
-          <AnimateOnScroll animation="fadeUp">
-            <h1 className="heading-display mb-6">
-              <GradientText gradient="primary">
-                {practice.name}
-              </GradientText>
-            </h1>
-          </AnimateOnScroll>
-          
-          <AnimateOnScroll animation="fadeUp" delay={0.2}>
-            <p className="body-large max-w-2xl mx-auto mb-8">
-              {practice.tagline}
-            </p>
-          </AnimateOnScroll>
-          
-          <AnimateOnScroll animation="fadeUp" delay={0.4}>
-            <p className="body-regular max-w-3xl mx-auto mb-12">
-              {practice.description}
-            </p>
-          </AnimateOnScroll>
-          
-          <AnimateOnScroll animation="fadeUp" delay={0.6}>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="xl" variant="glow">
-                Book Appointment
-              </Button>
-              <Button size="xl" variant="outline">
-                Emergency: (555) 123-4567
-              </Button>
-            </div>
-          </AnimateOnScroll>
-        </div>
+    <div>
+      <section className="bg-primary-light text-white text-center py-20">
+        <h1 className="text-5xl font-bold mb-4">Your Health, Our Priority</h1>
+        <p className="text-xl">
+          Providing compassionate and comprehensive gynecological care.
+        </p>
+      </section>
 
-        {/* Floating Cards */}
-        <div className="absolute inset-0 pointer-events-none">
-          <FloatingCard 
-            className="absolute top-20 left-10 w-48 opacity-20"
-            delay={0}
-            duration={8}
-          >
-            <div className="text-center">
-              <div className="text-2xl mb-2">🏥</div>
-              <p className="text-sm">24/7 Care</p>
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-12">Our Services</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-white p-8 rounded-lg shadow-md text-center">
+              <h3 className="text-2xl font-bold mb-4">Obstetrics</h3>
+              <p>
+                Comprehensive care for pregnancy, childbirth, and the postpartum
+                period.
+              </p>
             </div>
-          </FloatingCard>
-          
-          <FloatingCard 
-            className="absolute top-40 right-10 w-48 opacity-20"
-            delay={2}
-            duration={10}
-          >
-            <div className="text-center">
-              <div className="text-2xl mb-2">👩‍⚕️</div>
-              <p className="text-sm">Expert Doctors</p>
+            <div className="bg-white p-8 rounded-lg shadow-md text-center">
+              <h3 className="text-2xl font-bold mb-4">Gynecology</h3>
+              <p>
+                Addressing all aspects of women's reproductive health.
+              </p>
             </div>
-          </FloatingCard>
-          
-          <FloatingCard 
-            className="absolute bottom-20 left-1/4 w-48 opacity-20"
-            delay={4}
-            duration={12}
-          >
-            <div className="text-center">
-              <div className="text-2xl mb-2">🔬</div>
-              <p className="text-sm">Advanced Technology</p>
+            <div className="bg-white p-8 rounded-lg shadow-md text-center">
+              <h3 className="text-2xl font-bold mb-4">Laparoscopy</h3>
+              <p>
+                Minimally invasive surgical procedures for various conditions.
+              </p>
             </div>
-          </FloatingCard>
-        </div>
-      </Section>
-
-      {/* Stats Section */}
-      <Section spacing="lg" background="muted">
-        <AnimateOnScroll animation="fadeUp">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <Card className="text-center gradient-border">
-              <CardHeader>
-                <CardTitle className="text-primary text-2xl">
-                  {services.length}+
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="body-regular">Specialized Services</p>
-              </CardContent>
-            </Card>
-            
-            <Card className="text-center gradient-border">
-              <CardHeader>
-                <CardTitle className="text-primary text-2xl">
-                  {doctors.length}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="body-regular">Expert Physicians</p>
-              </CardContent>
-            </Card>
-            
-            <Card className="text-center gradient-border">
-              <CardHeader>
-                <CardTitle className="text-primary text-2xl">
-                  {new Date().getFullYear() - practice.establishedYear}+
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="body-regular">Years of Excellence</p>
-              </CardContent>
-            </Card>
           </div>
-        </AnimateOnScroll>
-      </Section>
+        </div>
+      </section>
+
+      <section className="bg-secondary-light py-20">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl font-bold mb-4">Meet Our Specialist</h2>
+          <p className="text-xl mb-8">
+            Dr. Jane Doe is a dedicated and experienced gynecologist.
+          </p>
+          <button className="bg-primary text-white px-8 py-3 rounded-full font-bold hover:bg-primary-light transition-colors">
+            Learn More
+          </button>
+        </div>
+      </section>
     </div>
   );
 }

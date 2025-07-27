@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useMutation } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
 
@@ -11,8 +10,10 @@ export default function HealthTipsSection() {
 
   const subscribeNewsletterMutation = useMutation({
     mutationFn: async (data: { email: string }) => {
-      const response = await apiRequest("POST", "/api/newsletter/subscribe", data);
-      return response.json();
+      // Simulate API call for demo purposes
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      console.log("Newsletter subscription (demo):", data);
+      return { success: true };
     },
     onSuccess: () => {
       toast({

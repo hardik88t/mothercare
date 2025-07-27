@@ -7,7 +7,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { insertAppointmentSchema } from "@shared/schema";
 import { useMutation } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { z } from "zod";
@@ -35,8 +34,10 @@ export default function ContactSection() {
 
   const appointmentMutation = useMutation({
     mutationFn: async (data: AppointmentFormData) => {
-      const response = await apiRequest("POST", "/api/appointments", data);
-      return response.json();
+      // Simulate API call for demo purposes
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      console.log("Appointment data (demo):", data);
+      return { success: true };
     },
     onSuccess: () => {
       toast({

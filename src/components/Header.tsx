@@ -1,25 +1,26 @@
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export default function Header() {
   return (
     <header className="bg-background border-b border-border">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-        <Link href="/" className="text-2xl font-bold text-primary">
+        <Link href="/" className="text-2xl font-bold text-success">
           MotherCare
         </Link>
         <nav className="hidden md:flex space-x-6 items-center">
-          <Link href="/" className="text-muted-foreground hover:text-primary">
+          <Link href="/" className="text-muted-foreground hover:text-success">
             Home
           </Link>
-          <Link href="/services" className="text-muted-foreground hover:text-primary">
+          <Link href="/services" className="text-muted-foreground hover:text-success">
             Services
           </Link>
-          <Link href="/contact" className="text-muted-foreground hover:text-primary">
+          <Link href="/contact" className="text-muted-foreground hover:text-success">
             Contact
           </Link>
-          <Link href="/appointment" className="bg-primary text-primary-foreground px-4 py-2 rounded-md text-sm font-medium hover:bg-primary/90">
-            Book Appointment
-          </Link>
+          <Button asChild>
+            <Link href="/appointment">Book Appointment</Link>
+          </Button>
         </nav>
         <button className="md:hidden">
           <svg

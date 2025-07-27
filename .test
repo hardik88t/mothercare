@@ -1,0 +1,38 @@
+# MotherCare Hospital Website Environment Variables
+
+# Site Configuration
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+NEXT_PUBLIC_SITE_NAME="MotherCare Hospital"
+
+# Contact Information
+NEXT_PUBLIC_HOSPITAL_PHONE="+1-555-123-4567"
+NEXT_PUBLIC_EMERGENCY_PHONE="+1-555-123-4567"
+NEXT_PUBLIC_HOSPITAL_EMAIL="info@mothercare.com"
+
+# Hospital Address
+NEXT_PUBLIC_HOSPITAL_ADDRESS="123 Healthcare Ave, Medical District, City 12345"
+NEXT_PUBLIC_HOSPITAL_COORDINATES_LAT="40.7128"
+NEXT_PUBLIC_HOSPITAL_COORDINATES_LNG="-74.0060"
+
+# Google Services (Optional)
+NEXT_PUBLIC_GOOGLE_MAPS_API_KEY="your_google_maps_api_key_here"
+NEXT_PUBLIC_GOOGLE_ANALYTICS_ID="your_google_analytics_id_here"
+
+# Email Service (for contact forms)
+EMAIL_SERVICE_API_KEY="your_email_service_api_key"
+EMAIL_FROM="noreply@mothercare.com"
+EMAIL_TO="appointments@mothercare.com"
+
+# Database (if needed for appointments)
+DATABASE_URL="your_database_connection_string"
+
+# Security
+NEXTAUTH_SECRET="your_nextauth_secret_for_admin_panel"
+NEXTAUTH_URL="http://localhost:3000"
+
+# Third-party Integrations
+APPOINTMENT_SYSTEM_API_KEY="your_appointment_system_api_key"
+PATIENT_PORTAL_API_KEY="your_patient_portal_api_key"
+
+# Development
+NODE_ENV="development"

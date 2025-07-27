@@ -12,15 +12,7 @@ import { useToast } from "@/hooks/use-toast";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { z } from "zod";
 
-const appointmentFormSchema = insertAppointmentSchema.extend({
-  firstName: z.string().min(1, "First name is required"),
-  lastName: z.string().min(1, "Last name is required"),
-  email: z.string().email("Please enter a valid email address"),
-  phone: z.string().min(10, "Please enter a valid phone number"),
-  preferredDate: z.string().min(1, "Please select a preferred date"),
-  preferredTime: z.string().min(1, "Please select a preferred time"),
-  serviceNeeded: z.string().min(1, "Please select a service"),
-});
+const appointmentFormSchema = insertAppointmentSchema;
 
 type AppointmentFormData = z.infer<typeof appointmentFormSchema>;
 
@@ -141,13 +133,18 @@ export default function ContactSection() {
               </div>
             </div>
 
-            {/* Map Placeholder */}
-            <div className="bg-slate-100 rounded-2xl h-64 flex items-center justify-center">
-              <div className="text-center text-slate-500">
-                <MapPin className="h-12 w-12 mx-auto mb-4" />
-                <p>Interactive Map</p>
-                <p className="text-sm">Location: 123 Healthcare Boulevard</p>
-              </div>
+            {/* Map Embed */}
+            <div className="bg-slate-100 rounded-2xl h-64 overflow-hidden">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3024.255462871424!2d-74.00594138459463!3d40.71278797932859!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a316e825b43%3A0x4c685e6e6f22d1c0!2s123%20Broadway%2C%20New%20York%2C%20NY%2010271%2C%20USA!5e0!3m2!1sen!2sus!4v1640995200000!5m2!1sen!2sus"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="MotherCare Hospital Location Map"
+              />
             </div>
           </div>
 
@@ -283,7 +280,7 @@ export default function ContactSection() {
                   name="notes"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-sm font-semibold text-slate-700">Additional Notes</FormLabel>
+                      <FormLabel className="text-sm font-semibold text-slate-700">Additional Notes (Optional)</FormLabel>
                       <FormControl>
                         <Textarea 
                           {...field} 

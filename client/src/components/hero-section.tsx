@@ -39,8 +39,8 @@ export default function HeroSection() {
           
           <div className="text-center">
             <img 
-              src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" 
-              alt="Professional female doctor consulting with patient in modern medical facility" 
+              src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" 
+              alt="Mother holding newborn baby in hospital setting showing maternal care" 
               className="rounded-2xl shadow-2xl w-full max-w-lg mx-auto"
             />
           </div>

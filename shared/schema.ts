@@ -38,6 +38,15 @@ export const insertAppointmentSchema = createInsertSchema(appointments).omit({
   id: true,
   status: true,
   createdAt: true,
+}).extend({
+  firstName: z.string().min(1, "First name is required"),
+  lastName: z.string().min(1, "Last name is required"), 
+  email: z.string().email("Please enter a valid email address"),
+  phone: z.string().min(10, "Please enter a valid phone number"),
+  preferredDate: z.string().min(1, "Please select a preferred date"),
+  preferredTime: z.string().min(1, "Please select a preferred time"),
+  serviceNeeded: z.string().min(1, "Please select a service"),
+  notes: z.string().optional(),
 });
 
 export const insertNewsletterSchema = createInsertSchema(newsletterSubscriptions).omit({

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import logoPath from "@assets/logo_1753649812671.png";
+import iconPath from "@assets/icon_1753649812671.png";
 
 export default function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -20,9 +20,9 @@ export default function Navigation() {
         <div className="flex justify-between items-center h-20">
           <div className="flex items-center space-x-4">
             <img 
-              src={logoPath} 
-              alt="MotherCare Hospital Logo" 
-              className="h-12 w-auto"
+              src={iconPath} 
+              alt="MotherCare Hospital Icon" 
+              className="h-16 w-16 object-contain"
             />
           </div>
           

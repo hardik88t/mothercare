@@ -4,6 +4,26 @@
 
 This is a full-stack web application for MotherCare Hospital, a gynecologist specialist facility. The application provides a comprehensive online presence with appointment booking functionality, newsletter subscriptions, and informational content about the hospital's services, doctors, and facilities.
 
+## Recent Changes (January 2025)
+
+### UI/UX Improvements
+- Updated navigation to use hospital icon instead of full logo for better visibility
+- Increased icon size to 64x64px for improved branding
+- Replaced hero section image with professional female doctor image appropriate for women's healthcare
+- Added favicon using hospital icon for better browser tab identification
+- Integrated Google Maps embed for real location display instead of placeholder
+
+### Form Enhancements  
+- Simplified appointment booking form with optional notes field
+- Updated form validation to clearly mark required vs optional fields
+- Consolidated form schema validation in shared schema file
+- Fixed type compatibility issues between frontend and backend form handling
+
+### Technical Updates
+- Fixed storage layer type mismatches for optional appointment notes
+- Updated image sources to use reliable Unsplash URLs
+- Improved accessibility with proper alt text for medical images
+
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
